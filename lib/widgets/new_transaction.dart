@@ -16,8 +16,9 @@ class _NewTransactionState extends State<NewTransaction> {
   DateTime _selectedDate;
 
   void _submitData() {
-    if (_amountController.text.isEmpty)
+    if (_amountController.text.isEmpty) {
       return;
+    }
     final enteredTitle = _titleController.text;
     final enteredAmount = double.parse(_amountController.text);
 
@@ -48,6 +49,7 @@ class _NewTransactionState extends State<NewTransaction> {
         _selectedDate = pickedDate;
       });
     });
+    print('...');
   }
 
   @override
@@ -60,21 +62,19 @@ class _NewTransactionState extends State<NewTransaction> {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: <Widget>[
             TextField(
-              decoration: InputDecoration(labelText: "Title"),
+              decoration: InputDecoration(labelText: 'Title'),
               controller: _titleController,
               onSubmitted: (_) => _submitData(),
-              //onChanged: (value) {
-              //  titleInput = value;
-              //},
+              // onChanged: (val) {
+              //   titleInput = val;
+              // },
             ),
             TextField(
-              decoration: InputDecoration(labelText: "Amount"),
+              decoration: InputDecoration(labelText: 'Amount'),
               controller: _amountController,
               keyboardType: TextInputType.number,
               onSubmitted: (_) => _submitData(),
-              //onChanged: (value) {
-              //  amountInput = value;
-              //},
+              // onChanged: (val) => amountInput = val,
             ),
             Container(
               height: 70,
@@ -83,7 +83,7 @@ class _NewTransactionState extends State<NewTransaction> {
                   Expanded(
                     child: Text(
                       _selectedDate == null
-                          ? 'No Date Chosen'
+                          ? 'No Date Chosen!'
                           : 'Picked Date: ${DateFormat.yMd().format(_selectedDate)}',
                     ),
                   ),
@@ -91,7 +91,9 @@ class _NewTransactionState extends State<NewTransaction> {
                     textColor: Theme.of(context).primaryColor,
                     child: Text(
                       'Choose Date',
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     onPressed: _presentDatePicker,
                   ),
@@ -100,10 +102,10 @@ class _NewTransactionState extends State<NewTransaction> {
             ),
             RaisedButton(
               child: Text('Add Transaction'),
-              color: Colors.purple,
+              color: Theme.of(context).primaryColor,
               textColor: Theme.of(context).textTheme.button.color,
               onPressed: _submitData,
-            )
+            ),
           ],
         ),
       ),
