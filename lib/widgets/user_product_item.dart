@@ -1,7 +1,7 @@
-import 'package:flutter_complete_guide/screens/edit_product_screen.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../screens/edit_product_screen.dart';
 import '../providers/products.dart';
 
 class UserProductItem extends StatelessWidget {
@@ -40,10 +40,7 @@ class UserProductItem extends StatelessWidget {
                 } catch (error) {
                   scaffold.showSnackBar(
                     SnackBar(
-                      content: Text(
-                        'Deleting failed!',
-                        textAlign: TextAlign.center,
-                      ),
+                      content: Text('Deleting failed!', textAlign: TextAlign.center,),
                     ),
                   );
                 }

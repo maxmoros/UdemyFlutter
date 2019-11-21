@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../providers/products.dart';
 import '../providers/product.dart';
+import '../providers/products.dart';
 
 class EditProductScreen extends StatefulWidget {
   static const routeName = '/edit-product';
@@ -50,7 +50,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
           'title': _editedProduct.title,
           'description': _editedProduct.description,
           'price': _editedProduct.price.toString(),
-          //       'imageUrl': _editedProduct.imageUrl,
+          // 'imageUrl': _editedProduct.imageUrl,
           'imageUrl': '',
         };
         _imageUrlController.text = _editedProduct.imageUrl;
@@ -84,9 +84,14 @@ class _EditProductScreenState extends State<EditProductScreen> {
   }
 
   Future<void> _saveForm() async {
-    if (!_form.currentState.validate()) return;
+    final isValid = _form.currentState.validate();
+    if (!isValid) {
+      return;
+    }
     _form.currentState.save();
-    setState(() => _isLoading = true);
+    setState(() {
+      _isLoading = true;
+    });
     if (_editedProduct.id != null) {
       await Provider.of<Products>(context, listen: false)
           .updateProduct(_editedProduct.id, _editedProduct);
@@ -98,25 +103,31 @@ class _EditProductScreenState extends State<EditProductScreen> {
         await showDialog(
           context: context,
           builder: (ctx) => AlertDialog(
-            title: Text('An Error occured!'),
-            content: Text('Something Went Wrong!'),
-            actions: <Widget>[
-              FlatButton(
-                child: Text('Okay'),
-                onPressed: () => Navigator.of(ctx).pop(),
-              )
-            ],
-          ),
+                title: Text('An error occurred!'),
+                content: Text('Something went wrong.'),
+                actions: <Widget>[
+                  FlatButton(
+                    child: Text('Okay'),
+                    onPressed: () {
+                      Navigator.of(ctx).pop();
+                    },
+                  )
+                ],
+              ),
         );
-      } 
+      }
       // finally {
-      //   setState(() => _isLoading = false);
+      //   setState(() {
+      //     _isLoading = false;
+      //   });
       //   Navigator.of(context).pop();
       // }
     }
-
-      setState(() => _isLoading = false);
-      Navigator.of(context).pop();
+    setState(() {
+      _isLoading = false;
+    });
+    Navigator.of(context).pop();
+    // Navigator.of(context).pop();
   }
 
   @override
@@ -156,13 +167,12 @@ class _EditProductScreenState extends State<EditProductScreen> {
                       },
                       onSaved: (value) {
                         _editedProduct = Product(
-                          title: value,
-                          price: _editedProduct.price,
-                          description: _editedProduct.description,
-                          imageUrl: _editedProduct.imageUrl,
-                          id: _editedProduct.id,
-                          isFavorite: _editedProduct.isFavorite,
-                        );
+                            title: value,
+                            price: _editedProduct.price,
+                            description: _editedProduct.description,
+                            imageUrl: _editedProduct.imageUrl,
+                            id: _editedProduct.id,
+                            isFavorite: _editedProduct.isFavorite);
                       },
                     ),
                     TextFormField(
@@ -189,13 +199,12 @@ class _EditProductScreenState extends State<EditProductScreen> {
                       },
                       onSaved: (value) {
                         _editedProduct = Product(
-                          title: _editedProduct.title,
-                          price: double.parse(value),
-                          description: _editedProduct.description,
-                          imageUrl: _editedProduct.imageUrl,
-                          id: _editedProduct.id,
-                          isFavorite: _editedProduct.isFavorite,
-                        );
+                            title: _editedProduct.title,
+                            price: double.parse(value),
+                            description: _editedProduct.description,
+                            imageUrl: _editedProduct.imageUrl,
+                            id: _editedProduct.id,
+                            isFavorite: _editedProduct.isFavorite);
                       },
                     ),
                     TextFormField(
