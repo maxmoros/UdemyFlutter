@@ -29,7 +29,8 @@ class Product with ChangeNotifier {
     final oldStatus = isFavorite;
     isFavorite = !isFavorite;
     notifyListeners();
-    final url = 'https://fluttertest-7ac61.firebaseio.com/userFavorites/$userId/$id.json?auth=$token';
+    final url =
+        'https://fluttertest-7ac61.firebaseio.com/userFavorites/$userId/$id.json?auth=$token';
     try {
       final response = await http.put(
         url,

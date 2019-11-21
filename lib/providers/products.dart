@@ -74,7 +74,8 @@ class Products with ChangeNotifier {
 
   Future<void> fetchAndSetProducts([bool filterByUser = false]) async {
     final filterString = filterByUser ? 'orderBy="creatorId"&equalTo="$userId"' : '';
-    var url = 'https://fluttertest-7ac61.firebaseio.com/products.json?auth=$authToken&$filterString';
+    var url =
+        'https://fluttertest-7ac61.firebaseio.com/products.json?auth=$authToken&$filterString';
     try {
       final response = await http.get(url);
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
@@ -83,8 +84,8 @@ class Products with ChangeNotifier {
       }
       url =
           'https://fluttertest-7ac61.firebaseio.com/userFavorites/$userId.json?auth=$authToken';
-      final favResponse = await http.get(url);
-      final favoriteData = json.decode(favResponse.body);
+      final favoriteResponse = await http.get(url);
+      final favoriteData = json.decode(favoriteResponse.body);
       final List<Product> loadedProducts = [];
       extractedData.forEach((prodId, prodData) {
         loadedProducts.add(Product(
