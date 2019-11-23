@@ -26,6 +26,10 @@
 	<string>We need permission to take a picture</string>
 	<key>NSCameraUsageDescription</key>
 	<string>We need permission to take a picture</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>We need permission to get location</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>We need permission to get location</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>We need permission to take a picture</string>
 	<key>UILaunchStoryboardName</key>
