@@ -1,6 +1,6 @@
-# vestiq
+# 
 
-A new Flutter project.
+This repo is based off a Udemy Flutter course I finished. Different branches represent different sub modules. This is annoying to look through the projects, but made starting each submodule from a constant initial state very efficient.
 
 ## Getting Started
 
